@@ -1,51 +1,43 @@
-import { Injectable } from '@nestjs/common';
-import { UsersService } from "../users/users.service";
-import { JwtService } from "@nestjs/jwt";
-import * as bcrypt from 'bcrypt';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { IUser } from 'src/users/interfaces/user.interface';
+import * as jwt from 'jsonwebtoken';
+import { UsersService } from 'src/users/users.service';
+import { Session } from './dto/session.type';
 
 @Injectable()
 export class AuthService {
-  constructor(
-    private usersService: UsersService,
-    private jwtService: JwtService,
-  ) {}
-  async validateUser(email: string, password: string): Promise<any> {
-    const user = await this.usersService.findOne(email);
-    const valid = user && (await bcrypt.compare(password, user.password));
 
-    if(user && valid) {
-      const { password, ...result } = user;
-      return result;
-    }
-
-    return null;
-  }
-
-  async login(user: any) {
-    const payload = { email: user.email, sub: user.id };
-    const {password, ...result } = user;
-    return {
-      access_token: this.jwtService.sign({
-        email: user.email,
-        sub: user.id,
-        role: user.role,
-      }),
-      user: result,
-    };
-
-  }
+  constructor(private readonly userService: UsersService) {}
 
 
-  async signup(user: any) {
-    const hashedPassword = await bcrypt.hash(user.password, 10);
-    const newUser = await this.usersService.findOne({
-      ...user,
-      password: hashedPassword,
-    });
-
-    const { password, ...result } = newUser;
-    return result;
-  }
+  async register(user: IUser): Promise<Session> {
+    let newUser = await this.userService.insert(user);
+    const token = jwt.sign({ data: newUser }, 'secret', { expiresIn: '1h' })
+    newUser = newUser.toObject();
+    delete newUser.password;
+    return { user: newUser, token };
 }
 
+async login(credentials: IUser): Promise<Session> {
+    let user = await this.userService.findByEmail(credentials.email);
+    if(user.password !== credentials.password) {
+        throw new NotFoundException();
+    }
+    user = user.toObject();
+    delete user.password;
+    const token = jwt.sign({ data: user }, 'secret', { expiresIn: '1h' })
+    return { user, token };
+}
 
+async isTokenValid(token: string): Promise<boolean | IUser> {
+    return new Promise((resolve, reject) => {
+        jwt.verify(token, 'secret', (err, result) => {
+            if(err) {
+                resolve(false);
+            } else {
+                resolve(result.data);
+            }
+        })
+    });
+}
+}
