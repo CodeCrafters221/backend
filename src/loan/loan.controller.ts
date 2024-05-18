@@ -1,11 +1,13 @@
 import { Controller, Get } from '@nestjs/common';
-import {ApiParam, ApiQuery, ApiResponse} from "@nestjs/swagger";
+import { ApiParam, ApiQuery, ApiResponse, ApiTags } from "@nestjs/swagger";
 import { CurrentUser} from "../auth/decorators/current-user.decorator";
 import { IUser} from "../users/interfaces/user.interface";
 import { LoanService } from "./loan.service";
 import { Loan } from "./dto/loan.entity";
 import { ObjectId } from "mongoose";
 
+
+@ApiTags('loans')
 @Controller('loans')
 export class LoanController {
   private id: ObjectId;
