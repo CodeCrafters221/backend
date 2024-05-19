@@ -8,10 +8,10 @@ async function bootstrap() {
   // Swagger for API documentations
 
   const config = new DocumentBuilder()
-  .setTitle('Reservation Nest Edacy')
-  .setDescription('The digital market API description')
+  .setTitle('Automatisation de processus d\'octroi de prêt d\'une structure de microfinance')
+  .setDescription('The microfinance API description')
   .setVersion('1.0')
-  .addTag('market')
+  .addTag('microfinance')
   .build();
   
   const document = SwaggerModule.createDocument(app, config);
