@@ -6,9 +6,8 @@ https://docs.nestjs.com/modules
 import { Module } from '@nestjs/common';
 
 @Module({
-    imports: [],
-    controllers: [
-        ClientsController,],
-    providers: [],
+  imports: [],
+  controllers: [ClientsController],
+  providers: [],
 })
-export class ClientsModule { }
+export class ClientsModule {}
