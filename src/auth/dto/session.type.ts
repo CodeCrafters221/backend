@@ -6,7 +6,7 @@ import { IUser } from 'src/users/interfaces/user.interface';
 @ObjectType()
 export class Session {
   @ApiProperty({ type: User })
-  @Field((type) => User)
+  @Field(() => User)
   user: IUser;
 
   @ApiProperty()

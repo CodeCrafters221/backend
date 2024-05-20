@@ -1,4 +1,4 @@
-import { createParamDecorator, SetMetadata } from '@nestjs/common';
+import { createParamDecorator } from '@nestjs/common';
 import { getRequestFromContext } from 'src/commons/utils';
 
 export const CurrentUser = createParamDecorator(

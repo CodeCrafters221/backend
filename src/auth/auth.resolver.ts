@@ -8,7 +8,7 @@ import { Session } from './dto/session.type';
 export class AuthResolver {
   constructor(private readonly authService: AuthService) {}
 
-  @Mutation((returns) => Session)
+  @Mutation(() => Session)
   register(
     @Args({ name: 'registerInput', type: () => RegisterInput })
     registerInput: IUser,

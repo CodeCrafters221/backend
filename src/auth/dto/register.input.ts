@@ -9,6 +9,6 @@ export class RegisterInput {
   @Field()
   password: string;
 
-  @Field((type) => UserRole)
+  @Field(() => UserRole)
   role: UserRole;
 }

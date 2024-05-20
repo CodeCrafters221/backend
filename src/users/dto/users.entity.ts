@@ -5,11 +5,11 @@ import { UserRole } from '../enums/user-role.enum';
 @ObjectType()
 export class User {
   @ApiProperty()
-  @Field((type) => String, { nullable: true })
+  @Field(() => String, { nullable: true })
   firstname: string;
 
   @ApiProperty()
-  @Field((type) => String, { nullable: true })
+  @Field(() => String, { nullable: true })
   lastname: string;
 
   @ApiProperty()
