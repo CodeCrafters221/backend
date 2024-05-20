@@ -14,11 +14,7 @@ export class UsersService extends MongoBasicQueriesService<IUser> {
     return this.model.create(user);
   }
 
-
-
   findByEmail(email: string) {
     return this.model.findOne({ email });
   }
-
-
 }

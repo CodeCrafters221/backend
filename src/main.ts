@@ -9,7 +9,6 @@ async function bootstrap() {
   app.enableCors(); // Cross-origin resource sharing
   app.setGlobalPrefix('api'); // Set global prefix to ""
 
-
   // Swagger for API documentations
 
   const config = new DocumentBuilder()
