@@ -14,19 +14,11 @@ export class UsersService extends MongoBasicQueriesService<IUser> {
     return this.model.create(user);
   }
 
-  findByUsername(username: string) {
-    return this.model.findOne({ username });
-  }
+
 
   findByEmail(email: string) {
     return this.model.findOne({ email});
   }
 
-  async findByEmailOrFail(email: string) {
-      const found = await this.findByEmail(email);
-      if(!found) {
-        throw new NotFoundException();
-      }
-      return found;
-  }
+
 }
