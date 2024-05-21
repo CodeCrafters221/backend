@@ -12,7 +12,6 @@ export class UsersService extends MongoBasicQueriesService<UserDto> {
   constructor(@InjectModel(UserDto.name) private model: Model<UserDto>) {
     super(model);
   }
-  // insert(user: IUser) {
   insert(user: UserDto) {
     return this.model.create(user);
   }
