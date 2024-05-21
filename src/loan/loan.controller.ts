@@ -17,6 +17,7 @@ export class LoanController {
   @ApiResponse({ status: 200, type: Loan })
   @ApiResponse({ status: 404, description: 'Loan not found' })
   @ApiResponse({ status: 500, description: 'Internal server error' })
+  // async fetchLoans(@CurrentUser() user: IUser) {
   async fetchLoans(@CurrentUser() user: IUser) {
     return this.loanService.findAll();
   }

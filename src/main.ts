@@ -7,7 +7,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   app.enableCors(); // Cross-origin resource sharing
-  app.setGlobalPrefix('api'); // Set global prefix to ""
+  app.setGlobalPrefix('api'); // Set global prefix to "api/"
 
   // Swagger for API documentations
 

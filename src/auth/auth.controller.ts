@@ -5,6 +5,7 @@ import { UserInput } from 'src/users/dto/users.input';
 import { IUser } from 'src/users/interfaces/user.interface';
 import { AuthService } from './auth.service';
 import { Session } from './dto/session.type';
+import { UserDto } from 'src/users/schemas/user.schema';
 
 @ApiTags('auth')
 @Controller('auth')
@@ -15,7 +16,8 @@ export class AuthController {
   @ApiResponse({ status: 201, type: Session })
   @ApiResponse({ status: 404, description: 'Verifier vos informations' })
   @Post('register')
-  register(@Body() user: IUser): Promise<Session> {
+  // register(@Body() user: IUser): Promise<Session> {
+  register(@Body() user: UserDto): Promise<Session> {
     return this.authService.register(user);
   }
 
