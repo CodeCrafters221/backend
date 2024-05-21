@@ -2,11 +2,12 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { Model, ObjectId } from 'mongoose';
 
 @Injectable()
-export class MongoBasicQueriesService <T>{
-
+export class MongoBasicQueriesService<T> {
   private abstractModel: Model<T>;
 
-  constructor(model: Model<T>) { this.abstractModel = model;}
+  constructor(model: Model<T>) {
+    this.abstractModel = model;
+  }
 
   insertOne(payload: T): Promise<T> {
     return this.abstractModel.create(payload);
@@ -22,11 +23,9 @@ export class MongoBasicQueriesService <T>{
 
   async findOneByIdOrFail(id: ObjectId) {
     const result = await this.findOneById(id);
-    if(!result) {
-        throw new NotFoundException(`L'entité avec id=${id} n'existe pas`);
+    if (!result) {
+      throw new NotFoundException(`L'entité avec id=${id} n'existe pas`);
     }
     return result;
   }
-
-
 }
