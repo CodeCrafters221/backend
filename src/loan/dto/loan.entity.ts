@@ -2,7 +2,8 @@ import { ObjectType, Field } from '@nestjs/graphql';
 import { ApiProperty } from '@nestjs/swagger';
 import { GqlUuid } from 'src/commons/graphql/uuid.scalar';
 import { User } from 'src/users/dto/users.entity';
-import { IUser } from 'src/users/interfaces/user.interface';
+import { UserLogin } from 'src/users/schemas/user.schema';
+// import { UserLogin } from 'src/users/interfaces/user.interface';
 
 @ObjectType()
 export class Loan {
@@ -12,7 +13,7 @@ export class Loan {
 
   @Field(() => User)
   @ApiProperty({ type: User, description: 'The user who requested the loan' })
-  user: IUser;
+  user: UserLogin;
 
   @Field(() => Number)
   @ApiProperty({ type: Number, description: 'The amount of the loan' })
@@ -42,11 +43,11 @@ export class Loan {
   @ApiProperty({ type: String, description: 'The status of the loan' })
   status: string;
 
-  @Field((type) => User)
+  @Field(() => User)
   @ApiProperty({ type: User, description: 'The client who requested the loan' })
-  client: IUser;
+  client: UserLogin;
 
-  @Field((type) => GqlUuid, { nullable: true })
+  @Field(() => GqlUuid, { nullable: true })
   @ApiProperty({
     type: String,
     description: 'The id of the client who requested the loan',

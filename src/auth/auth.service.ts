@@ -1,5 +1,5 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
-import { IUser } from 'src/users/interfaces/user.interface';
+// import { IUser } from 'src/users/interfaces/user.interface';
 import * as jwt from 'jsonwebtoken';
 import { UsersService } from 'src/users/users.service';
 import { Session } from './dto/session.type';
@@ -35,7 +35,8 @@ export class AuthService {
     return { user, token };
   }
 
-  async isTokenValid(token: string): Promise<boolean | IUser> {
+  // async isTokenValid(token: string): Promise<boolean | IUser> {
+  async isTokenValid(token: string): Promise<boolean | UserLogin> {
     return new Promise((resolve, reject) => {
       jwt.verify(token, 'secret', (err, result) => {
         if (err) reject(err);

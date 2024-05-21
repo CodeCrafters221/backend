@@ -2,10 +2,10 @@ import { Body, Controller, Post } from '@nestjs/common';
 import { ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { User } from 'src/users/dto/users.entity';
 import { UserInput } from 'src/users/dto/users.input';
-import { IUser } from 'src/users/interfaces/user.interface';
+// import { IUser } from 'src/users/interfaces/user.interface';
 import { AuthService } from './auth.service';
 import { Session } from './dto/session.type';
-import { UserDto } from 'src/users/schemas/user.schema';
+import { UserDto, UserLogin } from 'src/users/schemas/user.schema';
 
 @ApiTags('auth')
 @Controller('auth')
@@ -25,7 +25,8 @@ export class AuthController {
   @ApiResponse({ status: 201, type: Session })
   @ApiResponse({ status: 404, description: 'Verifier vos credentials' })
   @Post('login')
-  login(@Body() credentials: IUser): Promise<Session> {
+  // login(@Body() credentials: IUser): Promise<Session> {
+  login(@Body() credentials: UserLogin): Promise<Session> {
     return this.authService.login(credentials);
   }
 }
