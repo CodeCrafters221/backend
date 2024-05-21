@@ -1,6 +1,6 @@
 import { NotFoundException } from '@nestjs/common';
 import { Args, Query, Resolver } from '@nestjs/graphql';
-import { User } from './dto/users.entity';
+import { User } from './graphql/users.entity';
 import { UsersService } from './users.service';
 
 @Resolver()

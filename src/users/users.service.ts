@@ -4,7 +4,7 @@ import { Model } from 'mongoose';
 import { MongoBasicQueriesService } from 'src/commons/services/mongo-basic-queries.service';
 // import { IUser } from './interfaces/user.interface';
 // import { userModelName } from './schemas/user.model-name';
-import { UserDto } from './schemas/user.schema';
+import { UserDto } from './dto/user.schema';
 
 @Injectable()
 // export class UsersService extends MongoBasicQueriesService<IUser> {

@@ -1,6 +1,6 @@
 import { InputType, Field } from '@nestjs/graphql';
 import { ApiProperty } from '@nestjs/swagger';
-import { User } from 'src/users/dto/users.entity';
+import { User } from 'src/users/graphql/users.entity';
 
 @InputType()
 export class LoanInput {

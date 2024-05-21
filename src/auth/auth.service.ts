@@ -4,7 +4,7 @@ import * as jwt from 'jsonwebtoken';
 import { UsersService } from 'src/users/users.service';
 import { Session } from './dto/session.type';
 import * as bcrypt from 'bcrypt';
-import { UserDto, UserLogin } from 'src/users/schemas/user.schema';
+import { UserDto, UserLogin } from 'src/users/dto/user.schema';
 @Injectable()
 export class AuthService {
   constructor(private readonly userService: UsersService) {}

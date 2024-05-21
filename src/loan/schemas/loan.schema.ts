@@ -1,12 +1,12 @@
 import { Schema } from 'mongoose';
-import { userModelName } from '../../users/schemas/user.model-name';
+import { UserDto } from 'src/users/dto/user.schema';
 import { v4 } from 'uuid';
 
 export const loanSchema = new Schema(
   {
     user: {
       type: Schema.Types.ObjectId,
-      ref: userModelName,
+      ref: UserDto.name,
     },
     amount: { type: Number },
     interestRate: { type: Number },

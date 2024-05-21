@@ -1,5 +1,5 @@
 import { InputType, Field } from '@nestjs/graphql';
-import { UserRole } from 'src/users/enums/user-role.enum';
+import { UserRole } from 'src/users/dto/user.schema';
 
 @InputType()
 export class RegisterInput {

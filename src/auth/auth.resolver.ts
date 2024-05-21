@@ -4,7 +4,7 @@ import { Args, Mutation, Resolver } from '@nestjs/graphql';
 import { AuthService } from './auth.service';
 import { RegisterInput } from './dto/register.input';
 import { Session } from './dto/session.type';
-import { UserDto } from 'src/users/schemas/user.schema';
+import { UserDto } from 'src/users/dto/user.schema';
 
 @Resolver()
 export class AuthResolver {
