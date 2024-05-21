@@ -2,12 +2,11 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { MongoBasicQueriesService } from 'src/commons/services/mongo-basic-queries.service';
-import { ILoan } from './interface/loan.interface';
-import { LoanModelName } from './schemas/loan-model-name';
+import { ILoan, LoanDto } from './dto/loan.schema';
 
 @Injectable()
 export class LoanService extends MongoBasicQueriesService<ILoan> {
-  constructor(@InjectModel(LoanModelName) private model: Model<ILoan>) {
+  constructor(@InjectModel(LoanDto.name) private model: Model<ILoan>) {
     super(model);
   }
 

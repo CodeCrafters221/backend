@@ -2,14 +2,24 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 // import { IUser } from 'src/users/interfaces/user.interface';
 import * as jwt from 'jsonwebtoken';
 import { UsersService } from 'src/users/users.service';
-import { Session } from './dto/session.type';
+import { Session } from './graphql/session.type';
 import * as bcrypt from 'bcrypt';
-import { UserDto, UserLogin } from 'src/users/dto/user.schema';
+import { UserDto, IUser } from 'src/users/dto/user.schema';
 @Injectable()
 export class AuthService {
   constructor(private readonly userService: UsersService) {}
 
   saltOrRounds = 10;
+  /**
+   *
+   * @param user
+   * @returns Promise<Session>
+   * @description
+   * This function is used to register a new user.
+   * It takes a user object as input and returns a session object.
+   * The session object contains the user object and the token.
+   * The token is used to authenticate the user.
+   */
   async register(user: UserDto): Promise<Session> {
     console.log('AUTH SERVICE: user', user);
     user.password = await bcrypt.hash(user.password, this.saltOrRounds); // hashing the password before inserting to database
@@ -18,12 +28,20 @@ export class AuthService {
     newUser = newUser.toObject();
     console.log('AUTH SERVICE: newUser', newUser);
     delete newUser.password;
+    delete newUser.__v;
     return { user: newUser, token };
   }
 
-  // async login(credentials: IUser): Promise<Session> {
-  // async login(credentials: IUser): Promise<Session> {
-  async login(credentials: UserLogin): Promise<Session> {
+  /*
+    @param credentials
+    @returns Session
+    @description
+    This function is used to login a user.
+    It takes a user object as input and returns a session object.
+    The session object contains the user object and the token.
+    The token is used to authenticate the user.
+  */
+  async login(credentials: IUser): Promise<Session> {
     let user = await this.userService.findByEmail(credentials.email);
     const isMatch = await bcrypt.compare(credentials.password, user.password); // comparing the password with bcrypt
     if (!user || !isMatch) {
@@ -31,12 +49,22 @@ export class AuthService {
     }
     user = user.toObject();
     delete user.password;
+    delete user.__v;
     const token = jwt.sign({ data: user }, 'secret', { expiresIn: '1h' });
     return { user, token };
   }
 
-  // async isTokenValid(token: string): Promise<boolean | IUser> {
-  async isTokenValid(token: string): Promise<boolean | UserLogin> {
+  /**
+   *
+   * @param token
+   * @returns boolean or IUser
+   * @description
+   * This function is used to verify the token.
+   * It takes a token as input and returns a user object.
+   * The user object contains the user object and the token.
+   * The token is used to authenticate the user.
+   */
+  async isTokenValid(token: string): Promise<boolean | IUser> {
     return new Promise((resolve, reject) => {
       jwt.verify(token, 'secret', (err, result) => {
         if (err) reject(err);

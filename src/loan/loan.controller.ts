@@ -1,7 +1,7 @@
 import { Controller, Get } from '@nestjs/common';
 import { ApiParam, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { LoanService } from './loan.service';
-import { Loan } from './dto/loan.entity';
+import { Loan } from './graphql/loan.entity';
 import { ObjectId } from 'mongoose';
 
 @ApiTags('loans')
