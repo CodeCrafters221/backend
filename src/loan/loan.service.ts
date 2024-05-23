@@ -1,17 +1,23 @@
+/* eslint-disable prettier/prettier */
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { MongoBasicQueriesService } from 'src/commons/services/mongo-basic-queries.service';
-import { ILoan, LoanDto } from './dto/loan.schema';
+import { ILoan, LoanDto } from './dto/loan.dto';
 
 @Injectable()
-export class LoanService extends MongoBasicQueriesService<ILoan> {
-  constructor(@InjectModel(LoanDto.name) private model: Model<ILoan>) {
+export class LoanService extends MongoBasicQueriesService<LoanDto> {
+  constructor(@InjectModel(LoanDto.name) private model: Model<LoanDto>) {
     super(model);
   }
 
-  insert(loan: ILoan) {
-    return this.model.create(loan);
+  insert(loan: LoanDto) {
+    return this.model.create({...loan});
+  }
+
+
+  findLoansOfUser(userId: string){
+    return this.model.find({ userId })
   }
 
   findByLoanId(loanId: string) {
@@ -22,8 +28,8 @@ export class LoanService extends MongoBasicQueriesService<ILoan> {
     return this.model.find();
   }
 
-  async updateLoan(loan: ILoan) {
-    return this.model.updateOne({ loanId: loan.loanId }, loan);
+  async updateLoan(loan: ILoan, loanId: string) {
+    return this.model.findByIdAndUpdate(loanId, loan, { new: true});
   }
 
   async deleteLoan(loanId: string) {

@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { UsersModule } from './users/users.module';
@@ -9,7 +10,6 @@ import { APP_INTERCEPTOR } from '@nestjs/core';
 import { AppInterceptor } from './app.interceptor';
 import { GqlUuid } from './commons/graphql/uuid.scalar';
 import { LoanModule } from './loan/loan.module';
-
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),

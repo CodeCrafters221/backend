@@ -1,8 +1,7 @@
 import { Field, ObjectType } from '@nestjs/graphql';
 import { ApiProperty } from '@nestjs/swagger';
-import { User } from 'src/users/graphql/users.entity';
 import { IUser } from 'src/users/dto/user.dto';
-// import { IUser } from 'src/users/interfaces/user.interface';
+import { User } from 'src/users/graphql/users.entity';
 
 @ObjectType()
 export class Session {

@@ -3,7 +3,7 @@ import { LoanService } from './loan.service';
 import { LoanResolver } from './loan.resolver';
 import { MongooseModule } from '@nestjs/mongoose';
 import { LoanController } from './loan.controller';
-import { LoanDto, LoanSchema } from './dto/loan.schema';
+import { LoanDto, LoanSchema } from './dto/loan.dto';
 
 @Module({
   imports: [
