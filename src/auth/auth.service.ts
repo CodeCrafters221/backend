@@ -68,7 +68,12 @@ export class AuthService {
    * The token is used to authenticate the user.
    */
   async updateUser(userId: string, user: UserDto) {
-    return this.userService.updateUser(userId, user);
+    let updatedUser = await this.userService.updateUser(userId, user);
+    console.log("AUTHSERVICE: updated user", updatedUser)
+    updatedUser = updatedUser.toObject()
+    delete updatedUser.password
+    delete updatedUser.__v
+    return updatedUser
   }
 
 

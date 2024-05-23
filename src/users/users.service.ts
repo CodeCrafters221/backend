@@ -20,6 +20,6 @@ export class UsersService extends MongoBasicQueriesService<UserDto> {
 
 
   updateUser(userId: string, user: UserDto){
-    return this.model.updateOne({_id: userId}, user)
+    return this.model.findByIdAndUpdate(userId, {...user}, {new: true})
   }
 }

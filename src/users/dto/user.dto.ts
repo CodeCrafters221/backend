@@ -1,5 +1,6 @@
 import { Document } from 'mongoose';
 import { Prop, SchemaFactory, Schema } from '@nestjs/mongoose';
+import { ApiProperty } from '@nestjs/swagger';
 
 // EXPORT USER ROLE ENUMS FOR MONGOOSE SCHEMA
 export enum UserRole {
@@ -11,8 +12,10 @@ export enum UserRole {
 
 // USER LOGIN TYPE FOR APP
 export class IUser extends Document {
+  @ApiProperty()
   @Prop({ type: String, unique: true, required: true })
   email: string;
+  @ApiProperty()
   @Prop({ type: String, required: true })
   password: string;
 }
@@ -20,12 +23,15 @@ export class IUser extends Document {
 //  SCHEMA FOR USER INHERITS FROM USERLOGIN CLASS
 @Schema({ timestamps: true, collection: 'users', strict: false }) // collection: "users" defined, strict: false to allow other fields
 export class UserDto extends IUser {
+  @ApiProperty()
   @Prop({ type: String, required: true })
   firstname: string;
 
+  @ApiProperty()
   @Prop({ type: String, required: true })
   lastname: string;
 
+  @ApiProperty()
   @Prop({ type: String, enum: Object.values(UserRole) })
   role: UserRole;
 }

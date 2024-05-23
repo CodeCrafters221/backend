@@ -38,9 +38,9 @@ export class AuthController {
   @ApiResponse({ status: 404, description: 'Verifier vos informations' })
   @Post('update/:userId')
   async updateUser(@Body() user: UserDto, @Param('userId') userId: string) {
-    console.log("USER CONTROLLER: user payload: ",user, userId)
+    console.log("AUTH CONTROLLER: user payload: ",user, userId)
     const result = await this.authService.updateUser(userId, user);
-    console.log("USER CONTROLLER: update user method", result);
+    console.log("AUTH CONTROLLER: update user method", result);
     return result
   }
 }
