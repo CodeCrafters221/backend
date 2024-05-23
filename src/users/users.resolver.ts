@@ -7,12 +7,12 @@ import { UsersService } from './users.service';
 export class UsersResolver {
   constructor(private readonly usersService: UsersService) {}
 
-  @Query((returns) => [User])
+  @Query(() => [User])
   fetchUsers() {
     return this.usersService.findAll();
   }
 
-  @Query((returns) => User)
+  @Query(() => User)
   async fetchUser(@Args({ name: 'email', type: () => String }) email: string) {
     const found = await this.usersService.findByEmail(email);
     if (!found) {

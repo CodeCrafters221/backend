@@ -18,7 +18,7 @@ export class IUser extends Document {
 }
 
 //  SCHEMA FOR USER INHERITS FROM USERLOGIN CLASS
-@Schema({ timestamps: true, collection: 'users' }) // collection: "users" defined
+@Schema({ timestamps: true, collection: 'users', strict: false }) // collection: "users" defined, strict: false to allow other fields
 export class UserDto extends IUser {
   @Prop({ type: String, required: true })
   firstname: string;

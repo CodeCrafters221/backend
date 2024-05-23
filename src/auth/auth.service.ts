@@ -1,10 +1,10 @@
+/* eslint-disable prettier/prettier */
 import { Injectable, UnauthorizedException } from '@nestjs/common';
-// import { IUser } from 'src/users/interfaces/user.interface';
 import * as jwt from 'jsonwebtoken';
 import { UsersService } from 'src/users/users.service';
 import { Session } from './graphql/session.type';
 import * as bcrypt from 'bcrypt';
-import { UserDto, IUser } from 'src/users/dto/user.schema';
+import { UserDto, IUser } from 'src/users/dto/user.dto';
 @Injectable()
 export class AuthService {
   constructor(private readonly userService: UsersService) {}
@@ -53,6 +53,24 @@ export class AuthService {
     const token = jwt.sign({ data: user }, 'secret', { expiresIn: '1h' });
     return { user, token };
   }
+
+
+
+
+  /**
+   * 
+   * @param userId 
+   * @param user 
+   * @description
+   * This function is used to update a user.
+   * It takes a user object as input and returns a user object.
+   * The user object contains the user object and the token.
+   * The token is used to authenticate the user.
+   */
+  async updateUser(userId: string, user: UserDto) {
+    return this.userService.updateUser(userId, user);
+  }
+
 
   /**
    *

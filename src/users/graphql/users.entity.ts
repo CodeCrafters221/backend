@@ -1,6 +1,6 @@
 import { Field, ObjectType, registerEnumType } from '@nestjs/graphql';
 import { ApiProperty } from '@nestjs/swagger';
-import { UserRole } from '../dto/user.schema';
+import { UserRole } from '../dto/user.dto';
 
 // OBJECTYPE OF USER FOR GRAPHQL SCHEMA
 @ObjectType()
