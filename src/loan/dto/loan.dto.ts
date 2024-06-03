@@ -17,6 +17,7 @@ export class ILoan extends Document {
   approvalDate: Date;
   status: string;
   transactionId: string;
+  aiResponse?: string;
 }
 
 // POSSIBLE LOAN STATUS ENUM
@@ -30,6 +31,7 @@ export enum LoanStatus {
   timestamps: true, // POUR AJOUTER LA DATE D'INSERTION
   collection: 'loans', // NOM DE LA COLLECTION DANS LA BASE
   strict: false, //  POUR PERMETTRE D'AJOUTER D'AUTRES PARAMÉTRES LORS DE L'INSERTION
+  versionKey: false, // POUR NE PAS GERER LA VERSION
 })
 export class LoanDto extends Document {
   @Prop({ type: MongooseSchema.Types.ObjectId })
@@ -61,13 +63,16 @@ export class LoanDto extends Document {
   profession: string;
 
   @Prop({ type: String })
-  duration: number;
+  duration: string;
 
   @Prop({ type: String, default: LoanStatus.PENDING })
   status: string;
 
   @Prop({ type: Date })
   approvalDate: Date;
+
+  @Prop({ type: String, nullable: true })
+  aiResponse?: string;
 
   @Prop({ type: String, default: v4 })
   transactionId: string;
