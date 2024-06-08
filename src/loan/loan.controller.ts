@@ -30,7 +30,6 @@ export class LoanController {
    * Cette fonction permet de récupérer l'ensemble des prêts de tous les utilisateurs ou un seul utilisateur
    */
   @Get()
-  @ApiQuery({ name: 'userId', required: false })
   @ApiResponse({ status: 200, type: LoanDto })
   @ApiResponse({ status: 404, description: 'Loan not found' })
   @ApiResponse({ status: 500, description: 'Internal server error' })
