@@ -5,6 +5,7 @@ import { UsersResolver } from './users.resolver';
 import { UsersService } from './users.service';
 import { UserDto, UserSchema } from './dto/user.dto';
 import { LoanModule } from 'src/loan/loan.module';
+import { UsersController } from './users.controller';
 
 @Module({
   imports: [
@@ -13,5 +14,6 @@ import { LoanModule } from 'src/loan/loan.module';
   ],
   providers: [UsersService, UsersResolver],
   exports: [UsersService],
+  controllers: [UsersController],
 })
 export class UsersModule {}
