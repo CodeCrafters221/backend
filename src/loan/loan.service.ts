@@ -43,4 +43,27 @@ export class LoanService extends MongoBasicQueriesService<LoanDto> {
   async deleteLoan(loanId: string) {
     return this.model.deleteOne({ loanId });
   }
+
+
+
+
+
+
+
+
+
+  async updateConfigs(configs: any){
+    const res = await firstValueFrom(this.client.send<any>({cmd: 'updateConfigs'}, configs))
+    return res
+  }
+
+  async getConfigs(){
+    const res = await firstValueFrom(this.client.send<any>({cmd: 'getConfigs'}, {}))
+    return res
+  }
+
+  async respondToClient(loanId: string, clientMessage: string){
+    const res = await firstValueFrom(this.client.send<any>({cmd: 'respondToClient'}, {loanId, clientMessage}))
+    return res
+  }
 }
