@@ -10,6 +10,7 @@ import { APP_INTERCEPTOR } from '@nestjs/core';
 import { AppInterceptor } from './app.interceptor';
 import { GqlUuid } from './commons/graphql/uuid.scalar';
 import { LoanModule } from './loan/loan.module';
+import { AppController } from './app.controller';
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
@@ -24,7 +25,7 @@ import { LoanModule } from './loan/loan.module';
       playground: process.env.mode !== 'prod',
     }),
   ],
-  controllers: [],
+  controllers: [AppController],
   providers: [
     {
       provide: APP_INTERCEPTOR,
