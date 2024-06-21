@@ -13,7 +13,7 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
         name: 'AI_ASSISTANT_SERVICE',
         transport: Transport.TCP,
         options: {
-          port: 3001,
+          port: Number(process.env.AI_MICROSERVICE_PORT) || 3001,
         },
       },
     ]),
