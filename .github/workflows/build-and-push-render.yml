@@ -1,0 +1,35 @@
+# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
+
+name: CI/CD to render.com
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  docker-build-push-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+        
+    - name: Docker build and push
+      uses: cloudposse/github-action-docker-build-push@main
+      with:
+        organization: devdiop
+        repository: ccodecraft_backend
+        registry: docker.io
+        login: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+        tags: |
+          type=raw,value=latest
+        
+    - name: Deploy to render
+      uses: sozo-design/curl@v1.0.2
+      with:
+        args: https://api.render.com/deploy/srv-cpq37sg8fa8c739pahs0?key=4HTr5NBUlsc
+    
+
