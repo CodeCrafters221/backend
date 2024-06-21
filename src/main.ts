@@ -22,5 +22,6 @@ async function bootstrap() {
   SwaggerModule.setup('documentation', app, document);
 
   await app.listen(process.env.PORT || 8080);
+  console.log("MAIN GATEWAY STARTED ON PORT: ", process.env.PORT)
 }
 bootstrap();
